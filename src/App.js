@@ -1,14 +1,20 @@
 import React from "react";
 import Header from "./Header";
-import Nav from "./Nav"
+import Nav from "./Nav";
+import View from "./View"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function App() {
   return (
     <div className="container">
-      <Nav/>
-      <Header title="Employee App"/>
+      <BrowserRouter>
+        <Nav/>
+        <Routes>
+          <Route path="/view" element={<View/>}></Route>        
+        </Routes>
+      
+      </BrowserRouter>
     </div>
   );
 }
