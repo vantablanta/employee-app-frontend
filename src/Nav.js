@@ -7,27 +7,27 @@ function Nav() {
 
     return (
         <div className="container-fluid text-center">
-            <ul class="nav mt-5 mb-5 justify-content-center navbar-expand-lg navbar-light bg-light pt-3">
-                <Link class="nav-item" to={"view"}>
-                    <p class="nav-link">
+            <ul className="nav mt-5 mb-5 justify-content-center navbar-expand-lg navbar-light bg-light pt-3">
+                <Link className="nav-item" to={"view"}>
+                    <p className="nav-link">
                         View Employees
                         <FontAwesomeIcon icon={faEye} style={addIcon} />
                     </p>
                 </Link>
-                <Link class="nav-item" to={"add"}>
-                    <p class="nav-link">
+                <Link className="nav-item" to={"add"}>
+                    <p className="nav-link">
                         Add Employee
                         <FontAwesomeIcon icon={faPlus} style={viewIcon} />
                     </p>
                 </Link>
-                <Link class="nav-item" to={"update"}>
-                    <p class="nav-link">
+                <Link className="nav-item" to={"update"}>
+                    <p className="nav-link">
                         Update Employee Details 
                         <FontAwesomeIcon icon={faPencil} style={updateIcon} />
                     </p>
                 </Link>
-                <Link class="nav-item" to={"delete"}>
-                    <p class="nav-link">
+                <Link className="nav-item" to={"delete"}>
+                    <p className="nav-link">
                         Delete Employee
                         <FontAwesomeIcon icon={faTrash} style={deleteIcon} />
                     </p>

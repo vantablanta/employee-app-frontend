@@ -1,8 +1,11 @@
 import React from "react";
+import Header from "./Header";
 
 function Delete(){
     return(
-        <div></div>
+        <div>
+            <Header title={"Delete Employee Details"}></Header>
+        </div>
     )
 }
 

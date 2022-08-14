@@ -4,7 +4,7 @@ function Header(props){
     return(
         <div className="container">
             <header>
-                <h1 style={headerStyles}>{props.title}</h1>
+                <h2 style={headerStyles}>{props.title}</h2>
             </header>
         </div>
     )
