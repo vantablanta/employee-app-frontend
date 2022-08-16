@@ -1,15 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
-
-body {
-  font-family: 'Roboto Slab', serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.top-menu{
+    background-color: #4e63a5;
+    padding: 0 !important;
 }
 
-
-.nav-link{
-  cursor: pointer;
+.top-menu-item{
+    color: white! important;
+    font-weight: 500;
+    padding-left: 15px;
 }
 
+.page-heading{
+    background-color: #3c8df9;
+    padding: 0;
+    margin-top: 5px;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 0;
+}
 
+.sub-menu{
+    background-color: #e4effa;
+}
+
+.sub-menu-item{
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-right: 6px;
+}
+
+.modal-header{
+    background-color: #3486f3;
+    color: white;
+    width: 100%;
+    display: block !important;
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    padding-top: 1px !important;
+    padding-left: 4px !important
+}
+
+.modal-body{
+    padding: 20px;
+}
+
+.modal-menu{
+    background-color: #bbcee6;
+}
+
+.add-button{
+    background-color: #3b8cf8 !important;
+    border-color: #3b8cf8 !important;
+}
