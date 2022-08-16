@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-
+import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel, Selection } from 'devextreme-react/data-grid';
+import AddButton from './AddButton';
 export class Employee extends Component {
 
     constructor(props) {
@@ -8,7 +9,9 @@ export class Employee extends Component {
 
         this.state = {
             employees: [],
-        }
+        };
+
+        //this.onSelectionChanged = this.onSelectionChanged.bind(this);
     }
 
     refreshList() {
@@ -55,7 +58,7 @@ export class Employee extends Component {
         });
     }
 
-    
+
     // createClick() {
     //     fetch('https://localhost:7041/api/Employee', {
     //         method: 'POST',
@@ -127,55 +130,31 @@ export class Employee extends Component {
 
     render() {
         const { employees } = this.state;
+        const pageSizes = [10, 25, 50, 100];
+
         return (
             <div>
-                <button type="button"
-                    className="btn btn-primary m-2 float-end add-button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
-                    Add Employee
-                </button>
+                <AddButton/>
+                <DataGrid dataSource={employees} allowColumnReordering={true} rowAlternationEnabled={false} showBorders={true}
+                    onContentReady={this.onContentReady}  keyExpr="EmployeeCode"  hoverStateEnabled={true}>
+                    <GroupPanel visible={true} />
+                    <SearchPanel visible={true} highlightCaseSensitive={true} />
+                    <Grouping autoExpandAll={false} />
 
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th> Employee Code </th>
-                            <th> Employee Name </th>
-                            <th> Department </th>
-                            <th> Date Of Joining</th>
-                            <th> Cost Center </th>
+                    <Selection mode="single" />
+                    <Column dataField="Employees" groupIndex={0} />
+                    <Column dataField="Salary" caption="Salary"dataType="number" format="currency" alignment="right" />
+                    <Column dataField="EmployeeCode" dataType="string" />
+                    <Column dataField="EmployeeName" dataType="string" />
+                    <Column dataField="Department" dataType="string" />
+                    <Column dataField="DateOfJoining" dataType="date" />
+                    <Column dataField="CompCode" dataType="string" width={150} />
+                    <Column dataField="CostCenter" dataType="string" width={150} />
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {employees.map(emp =>
-                            <tr key={emp.ID}>
-                                <td>{emp.EmployeeCode}</td>
-                                <td>{emp.EmployeeName}</td>
-                                <td>{emp.Department}</td>
-                                <td>{emp.DateOfJoining}</td>
-                                <td>{emp.CostCenter}</td>
-                                <td>
-                                    <button type="button"
-                                        className="btn btn-sm btn-primary mr-1 text-light me-1"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"
-                                        onClick={() => this.editClick(emp)}>
-                                            Edit
-                                    </button>
-
-                                    <button type="button"
-                                        className="btn btn-sm btn-primary mr-1 text-light"
-                                        onClick={() => this.deleteClick(emp.EmployeeCode)}>
-                                            Delete
-                                    </button>
-
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-
+                    <Pager allowedPageSizes={pageSizes} showPageSizeSelector={true} />
+                    <Paging defaultPageSize={10} />
+                    
+                </DataGrid>
             </div>
         )
     }

@@ -30,6 +30,9 @@ function TopMenu() {
                 <Item icon="home" className="text-light">
                     <p className="top-menu-item">Inventory Management</p>
                 </Item>
+                <Item icon="home" className="text-light">
+                    <p className="top-menu-item">Signout</p>
+                </Item>
             </Menu>
         </div>
     )

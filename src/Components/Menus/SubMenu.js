@@ -1,6 +1,6 @@
 import React from "react";
 import Menu, { Item } from 'devextreme-react/menu';
-import AddForm from "./AddForm";
+import AddForm from "../AddForm";
 
 function SubMenu() {
 
@@ -11,25 +11,31 @@ function SubMenu() {
                 <Menu className="sub-menu rounded">
                     <Item className="text-light d-flex">
                         <p className="sub-menu-item" >
-                            <img src={require('../assets/inquiries.png')} alt="" />
+                            <img src={require('../../assets/add.png')} alt="" />
+                            <span>Add</span>
+                        </p>
+                    </Item>
+                    <Item className="text-light d-flex">
+                        <p className="sub-menu-item" >
+                            <img src={require('../../assets/inquiries.png')} alt="" />
                             <span>Find</span>
                         </p>
                     </Item>
                     <Item icon="home" className="text-light d-flex">
                         <p className="sub-menu-item">
-                            <img src={require('../assets/delete.png')} alt=""  />
+                            <img src={require('../../assets/delete.png')} alt=""  />
                            <span>Delete</span>
                         </p>
                     </Item>
                     <Item icon="home" className="text-light d-flex">
                         <p className="sub-menu-item">
-                            <img src={require('../assets/export.png')} alt="" />
+                            <img src={require('../../assets/export.png')} alt="" />
                             <span>Export</span>
                         </p>
                     </Item>
                     <Item icon="home" className="text-light d-flex">
                         <p className="sub-menu-item">
-                            <img src={require('../assets/print.png')} alt="" />
+                            <img src={require('../../assets/print.png')} alt="" />
                             <span>Print Report</span>
                         </p>
                     </Item>
@@ -40,7 +46,7 @@ function SubMenu() {
                     </Item>
                     <Item icon="home" className="text-light d-flex">
                         <p className="sub-menu-item">
-                            <img src={require('../assets/help.png')} alt="" />
+                            <img src={require('../../assets/help.png')} alt="" />
                             <span>Help</span>
                         </p>
                     </Item>
