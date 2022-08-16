@@ -15,7 +15,6 @@ export class Employee extends Component {
         fetch('https://localhost:7041/api/Employee')
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 this.setState({ employees: data });
             }, (err) => {
                 console.log(err)
@@ -36,49 +35,50 @@ export class Employee extends Component {
     //     this.setState({ DateOfJoining: e.target.value });
     // }
 
-    addClick() {
-        this.setState({
-            modalTitle: "Add Employee",
-            EmployeeCode: 0,
-            EmployeeName: "",
-            Department: "",
-        });
-    }
-
-
-    // editClick(emp) {
+    // addClick() {
     //     this.setState({
-    //         modalTitle: "Edit Employee",
-    //         EmployeeId: emp.EmployeeId,
-    //         EmployeeName: emp.EmployeeName,
-    //         Department: emp.Department,
-    //         DateOfJoining: emp.DateOfJoining,
+    //         modalTitle: "Add Employee",
+    //         EmployeeCode: "0",
+    //         EmployeeName: "",
+    //         Department: "",
     //     });
     // }
 
-    createClick() {
-        fetch('https://localhost:7041/api/Employee', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                EmployeeName: this.state.EmployeeName,
-                Department: this.state.Department,
-                DateOfJoining: this.state.DateOfJoining,
-            })
-        })
-            .then(res => res.json())
-            .then((result) => {
-                alert(result);
-                console.log(this.body)
-                this.refreshList();
-            }, (error) => {
-                console.log(error)
-                alert('Failed');
-            })
+
+    editClick(emp) {
+        this.setState({
+            modalTitle: "Edit Employee",
+            EmployeeId: emp.EmployeeId,
+            EmployeeName: emp.EmployeeName,
+            Department: emp.Department,
+            DateOfJoining: emp.DateOfJoining,
+        });
     }
+
+    
+    // createClick() {
+    //     fetch('https://localhost:7041/api/Employee', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             EmployeeName: this.state.EmployeeName,
+    //             Department: this.state.Department,
+    //             DateOfJoining: this.state.DateOfJoining,
+    //         })
+    //     })
+    //         .then(res => res.json())
+    //         .then((result) => {
+    //             alert(result);
+    //             console.log(this.body)
+    //             this.refreshList();
+    //         }, (error) => {
+    //             console.log(error)
+    //             alert('Failed');
+    //         })
+    // }
 
 
     // updateClick() {
@@ -106,24 +106,24 @@ export class Employee extends Component {
 
 
 
-    // deleteClick(id) {
-    //     if (window.confirm('Are you sure?')) {
-    //         fetch(variables.API_URL + 'employee/' + id, {
-    //             method: 'DELETE',
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         })
-    //             .then(res => res.json())
-    //             .then((result) => {
-    //                 alert(result);
-    //                 this.refreshList();
-    //             }, (error) => {
-    //                 alert('Failed');
-    //             })
-    //     }
-    // }
+    deleteClick(id) {
+        if (window.confirm('Are you sure?')) {
+            fetch("https://localhost:7041/api/Employee/" + id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then((result) => {
+                    alert(result);
+                    this.refreshList();
+                }, (error) => {
+                    alert('Failed');
+                })
+        }
+    }
 
     render() {
         const { employees } = this.state;
@@ -132,8 +132,7 @@ export class Employee extends Component {
                 <button type="button"
                     className="btn btn-primary m-2 float-end add-button"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    onClick={() => this.addClick()}>
+                    data-bs-target="#exampleModal">
                     Add Employee
                 </button>
 
@@ -143,8 +142,9 @@ export class Employee extends Component {
                             <th> Employee Code </th>
                             <th> Employee Name </th>
                             <th> Department </th>
-                            <th> Cost Center </th>
                             <th> Date Of Joining</th>
+                            <th> Cost Center </th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -157,15 +157,17 @@ export class Employee extends Component {
                                 <td>{emp.CostCenter}</td>
                                 <td>
                                     <button type="button"
-                                        className="btn btn-primary mr-1"
+                                        className="btn btn-sm btn-primary mr-1 text-light me-1"
                                         data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"
                                         onClick={() => this.editClick(emp)}>
+                                            Edit
                                     </button>
 
                                     <button type="button"
-                                        className="btn btn-primary mr-1"
+                                        className="btn btn-sm btn-primary mr-1 text-light"
                                         onClick={() => this.deleteClick(emp.EmployeeCode)}>
+                                            Delete
                                     </button>
 
                                 </td>

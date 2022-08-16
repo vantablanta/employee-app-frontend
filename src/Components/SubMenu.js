@@ -3,32 +3,46 @@ import Menu, { Item } from 'devextreme-react/menu';
 import AddForm from "./AddForm";
 
 function SubMenu() {
-    const addClick = ()=>{    
-        console.log("CLicked")
-    }
 
     return (
         <div>
             <div id="container-fluid">
                 <p className="page-heading rounded ps-2">Individual WorkPlan</p>
                 <Menu className="sub-menu rounded">
-                    <Item>
-                        <p className="sub-menu-item" >Find</p>
+                    <Item className="text-light d-flex">
+                        <p className="sub-menu-item" >
+                            <img src={require('../assets/inquiries.png')} alt="" />
+                            <span>Find</span>
+                        </p>
                     </Item>
-                    <Item icon="home" className="text-light">
-                        <p className="sub-menu-item">Delete</p>
+                    <Item icon="home" className="text-light d-flex">
+                        <p className="sub-menu-item">
+                            <img src={require('../assets/delete.png')} alt=""  />
+                           <span>Delete</span>
+                        </p>
                     </Item>
-                    <Item icon="home" className="text-light">
-                        <p className="sub-menu-item">Export</p>
+                    <Item icon="home" className="text-light d-flex">
+                        <p className="sub-menu-item">
+                            <img src={require('../assets/export.png')} alt="" />
+                            <span>Export</span>
+                        </p>
                     </Item>
-                    <Item icon="home" className="text-light">
-                        <p className="sub-menu-item">Print Report</p>
+                    <Item icon="home" className="text-light d-flex">
+                        <p className="sub-menu-item">
+                            <img src={require('../assets/print.png')} alt="" />
+                            <span>Print Report</span>
+                        </p>
                     </Item>
-                    <Item icon="home" className="text-light">
-                        <p className="sub-menu-item">Close</p>
+                    <Item icon="home" className="text-light d-flex">
+                        <p className="sub-menu-item">
+                            <span>Close</span>
+                        </p>
                     </Item>
-                    <Item icon="home" className="text-light">
-                        <p className="sub-menu-item">Help</p>
+                    <Item icon="home" className="text-light d-flex">
+                        <p className="sub-menu-item">
+                            <img src={require('../assets/help.png')} alt="" />
+                            <span>Help</span>
+                        </p>
                     </Item>
                 </Menu>
             </div>

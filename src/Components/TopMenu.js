@@ -5,24 +5,24 @@ function TopMenu() {
     return (
         <div>
             <h6 style={titleStyle}>Sample Customer</h6>
-            <Menu className="top-menu">
+            <Menu className="top-menu"    adaptivityEnabled={true}>
+                <Item icon="home" className="text-light"> 
+                    <p className="top-menu-item">General Accounting</p>
+                </Item>
                 <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Home Page</p>
+                    <p className="top-menu-item">Procure To Pay</p>
+                </Item>
+                <Item icon="home" className="text-light">
+                    <p className="top-menu-item">Order to Cash</p>
                 </Item>
                 <Item icon="home" className="text-light">
                     <p className="top-menu-item">Performance Management</p>
                 </Item>
                 <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Enterprise Developement</p>
+                    <p className="top-menu-item">Project Administration</p>
                 </Item>
                 <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Projects Administration</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">e-Services</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Asset Management</p>
+                    <p className="top-menu-item">System Administration</p>
                 </Item>
                 <Item icon="home" className="text-light">
                     <p className="top-menu-item">Procure to Pay</p>

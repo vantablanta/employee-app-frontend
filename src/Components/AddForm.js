@@ -1,17 +1,5 @@
 import React, { Component } from 'react';
-import Form, {
-    SimpleItem,
-    // GroupItem,
-    ButtonItem,
-    // TabbedItem,
-    // Tab,
-    // TabPanelOptions,
-    // NumericRule,
-    // EmailRule,
-    ButtonOptions
-} from 'devextreme-react/form';
-
-// import { CheckBox } from 'devextreme-react/check-box';
+import Form, {SimpleItem} from 'devextreme-react/form';
 import 'devextreme-react/text-area';
 
 
@@ -22,40 +10,44 @@ export class AddForm extends Component {
 
         this.state = {
             employees: [],
+            EmployeeName: "",
+            Department: "",
+            DateOfJoining: "",
+            EmployeeCode: 0,
+            CompCode: 0,
+            CostCenter: 0 
         }
     }
-
-    handleSubmit(e) {
-        e.preventDefault();
-
-        fetch('https://localhost:7041/api/Employee', {
+    
+    handleSubmit(event) {
+        event.preventDefault();
+        const requestOptions = {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ 
                 EmployeeName: this.state.EmployeeName,
                 Department: this.state.Department,
                 DateOfJoining: this.state.DateOfJoining,
+                EmployeeCode: this.state.EmployeeCode, 
+                CompCode: this.state.CompCode, 
+                CostCenter: this.state.CostCenter 
             })
-        })
-            .then(res => res.json())
+        };
+        fetch('https://localhost:7041/api/Employee', requestOptions)
+            .then(async response =>{
+                await response.json()
+                console.log(response.json())
+            })
             .then((result) => {
-                alert(result);
-                console.log(this.body)
-                this.refreshList();
+                console.log(result)
             }, (error) => {
                 console.log(error)
-                alert('Failed');
             })
     }
 
     render() {
-        const { employees } = this.state;
         return (
             <div>
-
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
@@ -70,42 +62,37 @@ export class AddForm extends Component {
                                 </div>
                                 <div className="mb-3">
                                     <div className="p-2 bd-highlight">
-                                        <form action="" onSubmit={handleSubmit}>
+                                        <form method='POST'>
                                             <Form colCount={2}>
-                                                <SimpleItem dataField="name" />
-                                                <SimpleItem dataField="department" />
-                                                <SimpleItem dataField="doj" />
-                                                <SimpleItem dataField="costCenter" />
+                                                <SimpleItem dataField="EmployeeName"  />
+                                                <SimpleItem dataField="Department" />
+                                                <SimpleItem dataField="DateOfJoining" />
+                                                <SimpleItem dataField="CostCenter" />
+                                                <SimpleItem dataField="EmployeeCodeeeCode" />
+                                                <SimpleItem dataField="CompCode" />
                                             </Form>
-                                            <ButtonItem horizontalAlignment="center">
-                                                <ButtonOptions text="Submit the Form" useSubmitBehavior={true} />
-                                            </ButtonItem>
                                             <hr />
                                             <div className='mt-3 text-center'>
-                                                <button className='btn btn-light text-primary me-1'>Cancel</button>
-                                                <button className='btn  btn-light text-primary me-1' onClick={this.handleSubmit()}>Save WorkPlan</button>
-                                                <button className='btn pe-3  btn-light text-primary me-1'>Submit WorkPlan</button>
+                                                <button className='btn btn-light text-primary me-1'>
+                                                    <img src={require('../assets/undo.png')} alt=""  />
+                                                    <span className='ps-1'>Cancel</span>
+                                                </button>
+                                                <button className='btn  btn-light text-primary me-1'>
+                                                    <img src={require('../assets/save.png')} alt="" />
+                                                    <span className='ps-1'>Save WorkPlan</span>
+                                                </button>
+                                                <button className='btn pe-3  btn-light text-primary me-1'>
+                                                    <img src={require('../assets/save.png')} alt="" />
+                                                    <span className='ps-1'>Submit WorkPlan</span>
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                <div className='modal-menu d-flex justify-content-between p-1'>
-                                    <p>New Individual WorkPlan</p>
-                                </div>
-                                {/* {EmployeeId === 0 ?
-                                    <button type="button"
-                                        className="btn btn-primary d-flex justify-content-center"
-                                        onClick={() => this.createClick()} >Create
-                                    </button>
-                                 : null}
-                                {EmployeeId !== 0 ?
-                                    <button type="button"
-                                        className="btn btn-primary float-start"
-                                        onClick={() => this.updateClick()}
-                                    >Update</button>
-                                    : null} */}
                             </div>
-
+                            <div className='modal-menu'>
+                                <p>New Individual WorkPlan</p>
+                            </div>
                         </div>
                     </div>
                 </div>
