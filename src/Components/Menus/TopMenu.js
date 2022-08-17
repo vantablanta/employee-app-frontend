@@ -41,9 +41,9 @@ class App extends React.Component {
         <div className="top-menu float-end">
             <h3 className="float-start customer-name">Customer Name</h3>
             <div className="d-flex">
-                <form class="col-md-4 d-flex me-3 ">
-                    <input class="form-control mt-1 mb-1" type="search" placeholder="Search" aria-label="Search"/>
-                    <button class="btn btn-sm btn-outline-primary ms-1 text-light" type="submit">Icon</button>
+                <form className="col-md-4 d-flex me-3 ">
+                    <input className="form-control mt-1 mb-1" type="search" placeholder="Search" aria-label="Search"/>
+                    <button className="btn btn-sm btn-outline-primary ms-1 text-light" type="submit">Icon</button>
                 </form>
                 <div className="mt-1">
                     <Menu

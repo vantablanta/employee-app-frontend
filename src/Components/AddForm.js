@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Form, {SimpleItem, TabbedItem, Tab, TabPanelOptions} from 'devextreme-react/form';
-import DateBox from 'devextreme-react/date-box';
 import 'devextreme-react/text-area';
 
 
@@ -11,45 +10,76 @@ export class AddForm extends Component {
         super(props);
 
         this.state = {
-            employees: [],
-            EmployeeName: "",
-            Department: "",
-            DateOfJoining: new DateBox(),
-            EmployeeCode: 0,
-            CompCode: 0,
-            CostCenter: 0,   
+            employee : {
+                EmployeeName: "Michelle Njeri",
+                Department: "Gender",
+                DateOfJoining: new Date(),
+                EmployeeCode: "22",
+                CompCode: "23",
+                CostCenter: "34",
+                Salary: 1000
+            }
         }
     }
+
+    handleSubmit(event){
+        try {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     
-    handleSubmit(event) {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ 
-                EmployeeName: this.state.EmployeeName,
-                Department: this.state.Department,
-                DateOfJoining: this.state.DateOfJoining,
-                EmployeeCode: this.state.EmployeeCode, 
-                CompCode: this.state.CompCode, 
-                CostCenter: this.state.CostCenter 
-            })
-        };
-        fetch('https://localhost:7041/api/Employee', requestOptions)
-            .then( response =>{
-                response.json()
-            })
-            .then((result) => {
-                console.log(result)
-            }, (error) => {
-                console.log(error)
-            })
+                body: JSON.stringify({ 
+                    employee: this.state.employee
+                })
+            };
+            fetch('https://localhost:7041/api/Employee', requestOptions)
+                .then( response =>{
+                    response.json()
+                })
+                .then((result) => {
+                    console.log(result)
+                }, (error) => {
+                    console.log(error)
+                })
+            
+    
+            event.preventDefault()
+        } catch (error) {
+            console.log(error)
+        }
+       
+    }
+    
+//     handleSubmit(event) {
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        //     body: JSON.stringify({ 
+        //         EmployeeName: this.EmployeeName,
+        //         Department: this.Department,
+        //         DateOfJoining: this.DateOfJoining,
+        //         EmployeeCode: this.EmployeeCode, 
+        //         CompCode: this.CompCode, 
+        //         CostCenter: this.CostCenter 
+        //     })
+        // };
+        // fetch('https://localhost:7041/api/Employee', requestOptions)
+        //     .then( response =>{
+        //         response.json()
+        //     })
+        //     .then((result) => {
+        //         console.log(result)
+        //     }, (error) => {
+        //         console.log(error)
+        //     })
     
 
-        event.preventDefault()
+//         event.preventDefault()
 
-}
+// }
 
     render() {
+        const { employee } = this.state;
         return (
             <div>
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
@@ -70,7 +100,7 @@ export class AddForm extends Component {
                                 <div className="mb-3">
                                     <div className="p-2 bd-highlight">
                                         <form onSubmit={this.handleSubmit}>                                        
-                                            <Form colCount={1}>
+                                            <Form colCount={1}  formData={employee}>
                                                     <TabbedItem>
                                                         <TabPanelOptions />
                                                         <Tab title="Personal Info">
@@ -80,11 +110,12 @@ export class AddForm extends Component {
                                                             <SimpleItem dataField="CostCenter" />
                                                             <SimpleItem dataField="EmployeeCode" />
                                                             <SimpleItem dataField="CompCode" />
+                                                            <SimpleItem dataField="Salary" />
                                                         </Tab>
                                                         <Tab title="Company Info">
                                                             <SimpleItem dataField="Comapany Name" />
                                                             <SimpleItem dataField="Company Code " />
-                                                            <SimpleItem dataField="Date of Registration" dataType="date" />
+                                                            <SimpleItem dataField="Date of Registration" dataType="date" editorType="dxDateBox"/>
                                                             <SimpleItem dataField="Headquarters" />
                                                             <SimpleItem dataField="KRA Code" />
                                                             <SimpleItem dataField="Number of Staff" />
@@ -97,7 +128,7 @@ export class AddForm extends Component {
                                                     <img src={require('../assets/undo.png')} alt=""  />
                                                     <span className='ps-1'>Cancel</span>
                                                 </button>
-                                                <button className='btn  btn-light text-primary me-1' type='submit' >
+                                                <button className='btn  btn-light text-primary me-1' type='button' >
                                                     <img src={require('../assets/save.png')} alt="" />
                                                     <span className='ps-1' type="button">Save</span>
                                                 </button>

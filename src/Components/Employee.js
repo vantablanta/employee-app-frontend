@@ -127,7 +127,7 @@ export class Employee extends Component {
                 <SubMenu/>
 
                 <DataGrid dataSource={employees} allowColumnReordering={true} rowAlternationEnabled={false} showBorders={true}
-                    onContentReady={this.onContentReady}  keyExpr="EmployeeCode"  hoverStateEnabled={true} filterRow={true} 
+                    onContentReady={this.onContentReady}  keyExpr="EmployeeCode"  hoverStateEnabled={true} 
                     showColumnHeaders= {true}>
 
                     <FilterPanel visible={true} />
@@ -137,11 +137,11 @@ export class Employee extends Component {
                     <Grouping autoExpandAll={false} />
 
                     <Selection mode="single"  data-bs-toggle="modal" data-bs-target="#exampleModal" />
-                    <FilterRow visible={true} />
+
                     <HeaderFilter visible={true} />
 
                     <FilterRow visible={true} />
-                    <FilterPanel visible={true} />
+
                     <FilterBuilderPopup position={"right"} />
                     <HeaderFilter visible={true} />
                     <Scrolling mode="infinite" />

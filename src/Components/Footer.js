@@ -8,9 +8,9 @@ function TopMenu() {
             <div className="footer-display">
                 <p className="text-center">
                     <small className="footer-text">
-                        <a href="" className="text-light"> Privacy Policy </a>
+                        <a href="/" className="text-light"> Privacy Policy </a>
                         <span className="fs-5 text-light p-1">.</span>
-                        <a href="" className="text-light"> Terms & Conditions</a>
+                        <a href="/" className="text-light"> Terms & Conditions</a>
                     </small>    
                 </p>
             </div>        

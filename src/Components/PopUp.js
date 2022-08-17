@@ -1,31 +1,57 @@
-import React from 'react';
-
-
+import React from 'react'; 
 import {Popup} from 'devextreme-react/popup';
+import DataGrid, { Column} from 'devextreme-react/data-grid';
 
-// import { Button } from 'devextreme-react/button';
+//   const renderContent = () =>  {
+//       return (
+//          <div>
+             
+//         <DataGrid dataSource={this.notifications}>
+//                      {/* <Column dataField="ID" dataType="string" headerFilter={true} allowSorting={true}/> */}
+//                      <Column dataField="Notification" dataType="string" allowFiltering={true} headerFilter={true} />
+//                      {/* <Column dataField="Count" dataType="string" allowFiltering={true} headerFilter={true} /> */}
 
- const renderContent = () =>  {
-     return (
-        <div>
-             <p> You have not updated your KPIs for the last three months</p>
-             <p> You have not updated your Tmesheets for the last three months</p>
-             <p> Some of your subordinates have not completed workplans for the current financial year</p>
-
-        </div>
+//         </DataGrid>
+//         </div>
      
-    )
-}
+//     )
+//  }
  
 class PopUp extends React.Component {
     constructor(props) {
         super(props);
  
         this.state = {
-            isPopupVisible: true
+            isPopupVisible: true,
+            notifications : []
         };
  
         this.onHiding = this.onHiding.bind(this);
+    }
+
+    refreshNotifications() {
+        fetch('https://localhost:7041/api/Notification')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ notifications: data });
+            }, (err) => {
+                console.log(err)
+            });
+    }
+
+    renderContent = () =>  {
+        return (
+           <div>
+                
+          <DataGrid dataSource={this.notifications}>
+                       {/* <Column dataField="ID" dataType="string" headerFilter={true} allowSorting={true}/> */}
+                       <Column dataField="Notification" dataType="string" allowFiltering={true} headerFilter={true} />
+                       {/* <Column dataField="Count" dataType="string" allowFiltering={true} headerFilter={true} /> */}
+   
+          </DataGrid>
+           </div>
+        
+       )
     }
  
     onHiding() {
@@ -35,19 +61,25 @@ class PopUp extends React.Component {
     }
  
     render() {
+  
         return (
-           
-            <Popup
+            <div>
+                <Popup
                 visible={this.state.isPopupVisible}
-                title="Your Notificatins"
-                contentRender={renderContent}
+                title="Your Notifications"
+                contentRender={this.renderContent}
                 onHiding={this.onHiding}
-                position="bottom"
+                position="right bottom"
                 width={300}
                 height={300} 
                 
                 
             />
+           
+            </div>
+           
+
+            
         );
     }
 }
