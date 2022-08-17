@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel, Selection, 
-    FilterRow, HeaderFilter} from 'devextreme-react/data-grid';
+    FilterRow, HeaderFilter, FilterPanel, FilterBuilderPopup, Scrolling,} from 'devextreme-react/data-grid';
+import SubMenu from './Menus/SubMenu';
 
-import AddButton from './AddButton';
 export class Employee extends Component {
 
     constructor(props) {
@@ -16,13 +16,13 @@ export class Employee extends Component {
             key: 'onClick',
             name: 'On Button Click',
           }];
-
+        this.filterOperations = ['contains', '='];
         this.state = {
             employees: [],
             showFilterRow: true,
             showHeaderFilter: true,
             currentFilter: this.applyFilterTypes[0].key,
-
+            filterValue: 'Pending'
         };
         this.dataGrid = null;
     }
@@ -50,7 +50,6 @@ export class Employee extends Component {
             DateOfJoining: emp.DateOfJoining,
         });
     }
-
 
     // createClick() {
     //     fetch('https://localhost:7041/api/Employee', {
@@ -100,8 +99,6 @@ export class Employee extends Component {
     //         })
     // }
 
-
-
     deleteClick(id) {
         if (window.confirm('Are you sure?')) {
             fetch("https://localhost:7041/api/Employee/" + id, {
@@ -127,23 +124,28 @@ export class Employee extends Component {
 
         return (
             <div>
-                <AddButton/>
+                <SubMenu/>
+
                 <DataGrid dataSource={employees} allowColumnReordering={true} rowAlternationEnabled={false} showBorders={true}
                     onContentReady={this.onContentReady}  keyExpr="EmployeeCode"  hoverStateEnabled={true} filterRow={true} 
-                    showColumnHeaders= {true} id="gridContainer">
+                    showColumnHeaders= {true}>
 
-                    <FilterRow visible={this.state.showFilterRow}
-                        applyFilter={this.state.currentFilter} />
+                    <FilterPanel visible={true} />
 
                     <GroupPanel visible={true} />
                     <SearchPanel visible={true} highlightCaseSensitive={true} />
                     <Grouping autoExpandAll={false} />
 
-                    <Selection mode="single" />
-                    {/* <Column dataField="Employees" groupIndex={0} /> */}
+                    <Selection mode="single"  data-bs-toggle="modal" data-bs-target="#exampleModal" />
                     <FilterRow visible={true} />
                     <HeaderFilter visible={true} />
-                    {/* <Column allowFiltering={false} /> */}
+
+                    <FilterRow visible={true} />
+                    <FilterPanel visible={true} />
+                    <FilterBuilderPopup position={"right"} />
+                    <HeaderFilter visible={true} />
+                    <Scrolling mode="infinite" />
+                    
                     <Column dataField="Salary" caption="Salary"dataType="number" format="currency" alignment="right" allowSorting={true}  />
                     <Column dataField="EmployeeCode" dataType="string" headerFilter={true} allowSorting={true}/>
                     <Column dataField="EmployeeName" dataType="string" allowFiltering={true} headerFilter={true} />
@@ -156,7 +158,6 @@ export class Employee extends Component {
                     <Paging defaultPageSize={10} />
 
                 </DataGrid>
-
 
             </div>
         )
