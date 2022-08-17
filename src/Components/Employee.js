@@ -123,7 +123,7 @@ export class Employee extends Component {
         const pageSizes = [10, 25, 50, 100];
 
         return (
-            <div>
+            <div >
                 <SubMenu/>
 
                 <DataGrid dataSource={employees} allowColumnReordering={true} rowAlternationEnabled={false} showBorders={true}

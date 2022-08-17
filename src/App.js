@@ -10,14 +10,8 @@ function App() {
   return (
     <div className="container-fluid">
         <Nav/>
-        <div className="row">
-          <div className="col-md-2">
             <LeftNav/>
-          </div>
-          <div className="col-md-10">
             <Employee/>
-          </div>
-        </div>
         <AddForm/>
         <Footer/>
     </div>
