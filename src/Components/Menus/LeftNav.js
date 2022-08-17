@@ -1,74 +1,12 @@
-// import Menu, { Item } from 'devextreme-react/menu';
-// import CheckBox from 'devextreme-react/check-box';
- 
-
-// function TopMenu() {
-//     const [toggle, setToggle] = useState(false);
- 
-//     const onValueChanged = useCallback((e) => {
-//         setToggle(e.value);
-//     }, []);
-//     return (
-//         <div>
-
-
-
-
-
-
-
-
-//             {/* <Menu className="container-fluid top-menu" adaptivityEnabled={toggle} >
-//                 <Item icon="home" className="text-light">
-//                     <h6 className="top-menu-item">Customer Name</h6>
-//                 </Item>
-//                 <Item icon="home" className="text-light">
-//                     <p className="top-menu-item">General Accounting</p>
-//                 </Item>
-//                 <Item icon="home" className="text-light">
-//                     <p className="top-menu-item">Procure To Pay</p>
-//                 </Item>
-//                 <Item icon="home" className="text-light">
-//                     <p className="top-menu-item">Order to Cash</p>
-//                 </Item>
-//                 <Item icon="home" className="text-light">
-//                     <p className="top-menu-item">Performance Management</p>
-//                 </Item>
-//                 <Item icon="home" className="text-light">
-//                     <p className="top-menu-item">Project Administration</p>
-//                 </Item>
-//                 <Item icon="home" className="text-light">
-//                     <p className="top-menu-item">System Administration</p>
-//                 </Item>
-//                 <Item icon="home" className="text-light">
-//                     <p className="top-menu-item">Procure to Pay</p>
-//                 </Item>
-//                 <Item icon="home" className="text-light">
-//                     <p className="top-menu-item">Inventory Management</p>
-//                 </Item>
-//                 <Item icon="home" className="text-light">
-//                     <p className="top-menu-item">Signout</p>
-//                 </Item>
-//                 <CheckBox onValueChanged={onValueChanged} />
-//             </Menu> */}
-//         </div>
-//     )
-// }
-
-// const openedStateModes = ["push", "shrink", "overlap"];
-// const positions = ["left", "right"];
-// const revealModes = ["slide", "expand"];
-
-
 import React from "react";
-
 import Drawer from "devextreme-react/drawer";
 import Toolbar from "devextreme-react/toolbar";
 import NavigationList from "./NavigationList.js";
+import Employee from "../Employee.js";
+import TopMenu from "./TopMenu.js";
 
 
-
-class TopMenu extends React.Component {
+class LeftNav extends React.Component {
   constructor() {
     super();
 
@@ -118,20 +56,27 @@ class TopMenu extends React.Component {
 
     return (
       <div>
-        <Toolbar items={this.toolbarItems} />
-        <Drawer
-          opened={opened}
-          openedStateMode={openedStateMode}
-          position={position}
-          revealMode={revealMode}
-          component={NavigationList}
-          closeOnOutsideClick={this.onOutsideClick}
-        >
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-md-1">
+                    <Toolbar items={this.toolbarItems} />
+                </div>
+                <div className="col-md-11">
+                    <TopMenu/>
+                </div>
+            </div>
+        </div>
+        <Drawer opened={opened}openedStateMode={openedStateMode}position={position}  revealMode={revealMode} component={NavigationList} 
+            closeOnOutsideClick={this.onOutsideClick} >    
+            <div className="ps-3">
+                <Employee/>
+            </div>
         </Drawer>
+        
       </div>
     );
   }
 }
 
 
-export default TopMenu;
+export default LeftNav;
