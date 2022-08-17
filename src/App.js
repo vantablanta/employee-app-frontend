@@ -6,6 +6,8 @@ import AddForm from "./Components/AddForm"
 import Footer from "./Components/Footer"
 
 
+import Popup from "./Components/PopUp";
+
 function App() {
   return (
     <div className="container-fluid">
@@ -13,7 +15,10 @@ function App() {
             <LeftNav/>
             <Employee/>
         <AddForm/>
+        <Popup/>
+
         <Footer/>
+
     </div>
   );
 }

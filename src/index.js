@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'devextreme/dist/css/dx.softblue.css';
+import 'devextreme/dist/css/dx.common.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
