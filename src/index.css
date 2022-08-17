@@ -1,14 +1,15 @@
 body{
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
+
 }
 
 .top-menu{
     background-color: #3c8df9  ;
-    color: white;
-    padding: 0;
+    color: white !important;
 }
 
 .top-menu-item{
@@ -173,9 +174,13 @@ body{
     background-color: rgba(191, 191, 191, -0.15);
     border: none;
   }
+
+ .dx-theme-accent-as-background-color{
+    font-weight: 500;
+ }
   
   .panel-list {
-    height: 400px;
+    height: 100%;
   }
   
   .dx-drawer-expand.dx-drawer-right .panel-list {
@@ -225,3 +230,18 @@ body{
     font-size: 26px;
   }
   
+  span .dx-menu-item-text{
+    padding: 0;
+  }
+
+  .btn-outline-primary{
+    background-color: #0d6efd !important;
+    height: 5vh;
+    margin-top: 0.6vh;
+
+  }
+
+  .customer-name{
+    position: relative;
+    left: -45vw
+  }

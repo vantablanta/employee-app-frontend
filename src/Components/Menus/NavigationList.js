@@ -6,7 +6,8 @@ import { navigation } from '../../data';
 class NavigationList extends React.PureComponent {
   render() {
     return (
-      <div className="list" style={{ width: '200px' }}>
+      <div className="list" style={{ width: '300px' }}>
+        <img src={require('../../assets/profiles/person.jpg')} alt="" className='img-fluid'  />
         <List
           dataSource={navigation}
           hoverStateEnabled={false}

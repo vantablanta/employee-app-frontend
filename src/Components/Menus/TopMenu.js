@@ -1,128 +1,167 @@
-import Menu, { Item } from 'devextreme-react/menu';
-import CheckBox from 'devextreme-react/check-box';
-import React, {useCallback, useState} from "react";
 
-// import Drawer from "devextreme-react/drawer";
-// import Toolbar from "devextreme-react/toolbar";
-// import NavigationList from "./NavigationList.js";
+import React from "react";
+import Menu from "devextreme-react/menu";
+import {menus} from "../../data";
 
-function TopMenu() {
-    const [toggle, setToggle] = useState(false);
- 
-    const onValueChanged = useCallback((e) => {
-        setToggle(e.value);
-    }, []);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.menus = menus;
+    this.showSubmenuModes = [
+      {
+        name: "onHover",
+        delay: { show: 0, hide: 500 }
+      },
+      {
+        name: "onClick",
+        delay: { show: 0, hide: 300 }
+      }
+    ];
+    this.state = {
+      showFirstSubmenuModes: this.showSubmenuModes[1],
+      orientation: "horizontal",
+      hideSubmenuOnMouseLeave: false,
+      currentProduct: null
+    };
+    this.itemClick = this.itemClick.bind(this);
+    this.showSubmenuModeChanged = this.showSubmenuModeChanged.bind(this);
+    this.orientationChanged = this.orientationChanged.bind(this);
+    this.hideSubmenuOnMouseLeaveChanged = this.hideSubmenuOnMouseLeaveChanged.bind(
+      this
+    );
+  }
+
+  render() {
+    const {
+      showFirstSubmenuModes,
+      orientation,
+      hideSubmenuOnMouseLeave
+    } = this.state;
     return (
-        <div>
-            <Menu className="container-fluid top-menu" adaptivityEnabled={toggle} >
-                <Item icon="home" className="text-light">
-                    <h6 className="top-menu-item">Customer Name</h6>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">General Accounting</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Procure To Pay</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Order to Cash</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Performance Management</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Project Administration</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">System Administration</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Procure to Pay</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Inventory Management</p>
-                </Item>
-                <Item icon="home" className="text-light">
-                    <p className="top-menu-item">Signout</p>
-                </Item>
-                <CheckBox onValueChanged={onValueChanged} />
-            </Menu>
+        <div className="top-menu float-end">
+            <h3 className="float-start customer-name">Customer Name</h3>
+            <div className="d-flex">
+                <form class="col-md-4 d-flex me-3 ">
+                    <input class="form-control mt-1 mb-1" type="search" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-sm btn-outline-primary ms-1 text-light" type="submit">Icon</button>
+                </form>
+                <div className="mt-1">
+                    <Menu
+                    dataSource={this.menus}
+                    displayExpr="name"
+                    showFirstSubmenuMode={showFirstSubmenuModes}
+                    orientation={orientation}
+                    hideSubmenuOnMouseLeave={hideSubmenuOnMouseLeave}
+                    onItemClick={this.itemClick}
+                    // adaptivityEnabled={true}
+                     />
+                </div>
+
+            </div>
+
         </div>
-    )
+
+    );
+  }
+
+  itemClick(e) {
+    if (e.itemData.price) {
+      this.setState({
+        currentProduct: e.itemData
+      });
+    }
+  }
+
+  showSubmenuModeChanged(e) {
+    this.setState({
+      showFirstSubmenuModes: e.value
+    });
+  }
+
+  orientationChanged(e) {
+    this.setState({
+      orientation: e.value
+    });
+  }
+
+  hideSubmenuOnMouseLeaveChanged(e) {
+    this.setState({
+      hideSubmenuOnMouseLeave: e.value
+    });
+  }
 }
 
-
-export default TopMenu;
-
+export default App;
 
 
 
 
-// const openedStateModes = ["push", "shrink", "overlap"];
-// const positions = ["left", "right"];
-// const revealModes = ["slide", "expand"];
 
-// class TopMenu extends React.Component {
-//   constructor() {
-//     super();
 
-//     this.state = {
-//       opened: true,
-//       openedStateMode: "shrink",
-//       revealMode: "slide",
-//       position: "left"
-//     };
 
-//     this.toolbarItems = [
-//       {
-//         widget: "dxButton",
-//         location: "before",
-//         options: {
-//           icon: "menu",
-//           onClick: () => this.setState({ opened: !this.state.opened })
-//         }
-//       }
-//     ];
 
-//     this.onOpenedStateModeChanged = this.onOpenedStateModeChanged.bind(this);
-//     this.onRevealModeChanged = this.onRevealModeChanged.bind(this);
-//     this.onPositionChanged = this.onPositionChanged.bind(this);
-//     this.onPositionChanged = this.onPositionChanged.bind(this);
-//     this.onOutsideClick = this.onOutsideClick.bind(this);
-//   }
 
-//   onOpenedStateModeChanged({ value }) {
-//     this.setState({ openedStateMode: value });
-//   }
 
-//   onRevealModeChanged({ value }) {
-//     this.setState({ revealMode: value });
-//   }
 
-//   onPositionChanged({ value }) {
-//     this.setState({ position: value });
-//   }
 
-//   onOutsideClick() {
-//     this.setState({ opened: false });
-//   }
 
-//   render() {
-//     const { opened, openedStateMode, position, revealMode } = this.state;
 
+
+
+
+
+
+
+
+// import Menu, { Item } from 'devextreme-react/menu';
+// import CheckBox from 'devextreme-react/check-box';
+// import React, {useCallback, useState} from "react";
+
+// function TopMenu() {
+//     const [toggle, setToggle] = useState(false);
+ 
+//     const onValueChanged = useCallback((e) => {
+//         setToggle(e.value);
+//     }, []);
 //     return (
-//       <div>
-//         <Toolbar items={this.toolbarItems} />
-//         <Drawer
-//           opened={opened}
-//           openedStateMode={openedStateMode}
-//           position={position}
-//           revealMode={revealMode}
-//           component={NavigationList}
-//           closeOnOutsideClick={this.onOutsideClick}
-//         >
-//         </Drawer>
-//       </div>
-//     );
-//   }
+//         <div>
+//             <Menu className="container-fluid top-menu" adaptivityEnabled={toggle} >
+//                 <Item icon="home" className="text-light">
+//                     <h6 className="top-menu-item">Customer Name</h6>
+//                 </Item>
+//                 <Item icon="home" className="text-light">
+//                     <p className="top-menu-item">General Accounting</p>
+//                 </Item>
+//                 <Item icon="home" className="text-light">
+//                     <p className="top-menu-item">Procure To Pay</p>
+//                 </Item>
+//                 <Item icon="home" className="text-light">
+//                     <p className="top-menu-item">Order to Cash</p>
+//                 </Item>
+//                 <Item icon="home" className="text-light">
+//                     <p className="top-menu-item">Performance Management</p>
+//                 </Item>
+//                 <Item icon="home" className="text-light">
+//                     <p className="top-menu-item">Project Administration</p>
+//                 </Item>
+//                 <Item icon="home" className="text-light">
+//                     <p className="top-menu-item">System Administration</p>
+//                 </Item>
+//                 <Item icon="home" className="text-light">
+//                     <p className="top-menu-item">Procure to Pay</p>
+//                 </Item>
+//                 <Item icon="home" className="text-light">
+//                     <p className="top-menu-item">Inventory Management</p>
+//                 </Item>
+//                 <Item icon="home" className="text-light">
+//                     <p className="top-menu-item">Signout</p>
+//                 </Item>
+//                 <CheckBox onValueChanged={onValueChanged} />
+//             </Menu>
+//         </div>
+//     )
 // }
+
+
+// export default TopMenu;
+

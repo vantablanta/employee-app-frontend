@@ -58,11 +58,11 @@ class LeftNav extends React.Component {
       <div>
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-1">
-                    <Toolbar items={this.toolbarItems} />
-                </div>
-                <div className="col-md-11">
+            <div className="top-menu">
                     <TopMenu/>
+                </div>
+                <div className="">
+                    <Toolbar items={this.toolbarItems} />
                 </div>
             </div>
         </div>
