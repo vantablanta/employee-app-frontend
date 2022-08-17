@@ -6,7 +6,7 @@ export class AddButton extends Component {
         return (
             <div>
                 <button type="button"
-                    className="btn btn-sm btn-primary m-2 float-end add-button"
+                    className="btn btn-sm btn-primary m-2 add-button"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                     Add Employee

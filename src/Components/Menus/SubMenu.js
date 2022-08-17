@@ -8,7 +8,7 @@ function SubMenu() {
         <div>
             <div id="container-fluid">
                 <p className="page-heading rounded ps-2">Individual WorkPlan</p>
-                <Menu className="sub-menu rounded">
+                <Menu className="sub-menu rounded"  adaptivityEnabled={true}  inn>
                     <Item className="text-light d-flex">
                         <p className="sub-menu-item" >
                             <img src={require('../../assets/add.png')} alt="" />
@@ -52,7 +52,6 @@ function SubMenu() {
                     </Item>
                 </Menu>
             </div>
-
             <AddForm/>
         </div>
     )

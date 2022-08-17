@@ -5,7 +5,7 @@ function TopMenu() {
     return (
         <div>
             <h6 style={titleStyle}>Sample Customer</h6>
-            <Menu className="top-menu"    adaptivityEnabled={true}>
+            <Menu className="top-menu"    adaptivityEnabled={true} >
                 <Item icon="home" className="text-light"> 
                     <p className="top-menu-item">General Accounting</p>
                 </Item>

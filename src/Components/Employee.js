@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 
-import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel, Selection } from 'devextreme-react/data-grid';
+import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel, Selection, 
+    FilterRow, HeaderFilter} from 'devextreme-react/data-grid';
+
 import AddButton from './AddButton';
 export class Employee extends Component {
 
     constructor(props) {
         super(props);
 
+        this.applyFilterTypes = [{
+            key: 'auto',
+            name: 'Immediately',
+          }, {
+            key: 'onClick',
+            name: 'On Button Click',
+          }];
+
         this.state = {
             employees: [],
-        };
+            showFilterRow: true,
+            showHeaderFilter: true,
+            currentFilter: this.applyFilterTypes[0].key,
 
-        //this.onSelectionChanged = this.onSelectionChanged.bind(this);
+        };
+        this.dataGrid = null;
     }
 
     refreshList() {
@@ -27,26 +40,6 @@ export class Employee extends Component {
     componentDidMount() {
         this.refreshList();
     }
-
-    // changeEmployeeName = (e) => {
-    //     this.setState({ EmployeeName: e.target.value });
-    // }
-    // changeDepartment = (e) => {
-    //     this.setState({ Department: e.target.value });
-    // }
-    // changeDateOfJoining = (e) => {
-    //     this.setState({ DateOfJoining: e.target.value });
-    // }
-
-    // addClick() {
-    //     this.setState({
-    //         modalTitle: "Add Employee",
-    //         EmployeeCode: "0",
-    //         EmployeeName: "",
-    //         Department: "",
-    //     });
-    // }
-
 
     editClick(emp) {
         this.setState({
@@ -136,25 +129,35 @@ export class Employee extends Component {
             <div>
                 <AddButton/>
                 <DataGrid dataSource={employees} allowColumnReordering={true} rowAlternationEnabled={false} showBorders={true}
-                    onContentReady={this.onContentReady}  keyExpr="EmployeeCode"  hoverStateEnabled={true}>
+                    onContentReady={this.onContentReady}  keyExpr="EmployeeCode"  hoverStateEnabled={true} filterRow={true} 
+                    showColumnHeaders= {true} id="gridContainer">
+
+                    <FilterRow visible={this.state.showFilterRow}
+                        applyFilter={this.state.currentFilter} />
+
                     <GroupPanel visible={true} />
                     <SearchPanel visible={true} highlightCaseSensitive={true} />
                     <Grouping autoExpandAll={false} />
 
                     <Selection mode="single" />
-                    <Column dataField="Employees" groupIndex={0} />
-                    <Column dataField="Salary" caption="Salary"dataType="number" format="currency" alignment="right" />
-                    <Column dataField="EmployeeCode" dataType="string" />
-                    <Column dataField="EmployeeName" dataType="string" />
-                    <Column dataField="Department" dataType="string" />
-                    <Column dataField="DateOfJoining" dataType="date" />
-                    <Column dataField="CompCode" dataType="string" width={150} />
-                    <Column dataField="CostCenter" dataType="string" width={150} />
+                    {/* <Column dataField="Employees" groupIndex={0} /> */}
+                    <FilterRow visible={true} />
+                    <HeaderFilter visible={true} />
+                    {/* <Column allowFiltering={false} /> */}
+                    <Column dataField="Salary" caption="Salary"dataType="number" format="currency" alignment="right" allowSorting={true}  />
+                    <Column dataField="EmployeeCode" dataType="string" headerFilter={true} allowSorting={true}/>
+                    <Column dataField="EmployeeName" dataType="string" allowFiltering={true} headerFilter={true} />
+                    <Column dataField="Department" dataType="string" allowFiltering={true} headerFilter={true} />
+                    <Column dataField="DateOfJoining" dataType="date" allowFiltering={true} headerFilter={true} />
+                    <Column dataField="CompCode" dataType="string" allowFiltering={true} headerFilter={true}  />
+                    <Column dataField="CostCenter" dataType="string"  allowFiltering={true} headerFilter={true} />
 
                     <Pager allowedPageSizes={pageSizes} showPageSizeSelector={true} />
                     <Paging defaultPageSize={10} />
-                    
+
                 </DataGrid>
+
+
             </div>
         )
     }
