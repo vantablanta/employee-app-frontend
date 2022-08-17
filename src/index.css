@@ -1,6 +1,12 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .top-menu{
-    background-color: #4e63a5;
-    padding: 0 !important;
+    background-color: #3c8df9  ;
+    color: white;
 }
 
 .top-menu-item{
@@ -54,3 +60,82 @@
     border-color: #3b8cf8 !important;
     float: right;
 }
+
+#accordion {
+    height: 700px;
+  }
+  
+  #accordion h1 {
+    font-size: 20px;
+  }
+  
+  #accordion h1,
+  #accordion p {
+    margin: 0;
+  }
+  
+  #accordion-container {
+    margin-right: 400px;
+  }
+  
+  .dx-theme-material #accordion .dx-accordion-item-title {
+    display: flex;
+  }
+  
+  .dx-theme-material #accordion h1 {
+    align-self: center;
+  }
+  
+  .options {
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 340px;
+    top: 0;
+    background-color: rgba(191, 191, 191, 0.15);
+  }
+  
+  .options > .caption {
+    font-weight: 500;
+    font-size: 18px;
+  }
+  
+  .option {
+    margin-top: 10px;
+  }
+  
+  .option > .caption {
+    margin-top: 10px;
+    display: inline-block;
+  }
+  
+  .option > .dx-tagbox {
+    margin-top: 2px;
+  }
+    
+
+  .navbar-brand, .nav-link{
+    color: white;
+  }
+
+     
+  .footer-display{
+    background-color: #3486f3;
+  }
+
+  .main{
+    padding: 0;
+  }
+
+  .footer-text{
+    color: white;
+    font-weight: 400;
+  }
+
+  .yellow-footer-line{
+    color: #FFCC00;
+    padding: 3px;
+    opacity: 1;
+    margin: 0;
+  }

@@ -10,7 +10,7 @@ function SubMenu() {
                 <p className="page-heading rounded ps-2">Individual WorkPlan</p>
                 <Menu className="sub-menu rounded"  adaptivityEnabled={true}  inn>
                     <Item className="text-light d-flex">
-                        <p className="sub-menu-item" >
+                        <p className="sub-menu-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <img src={require('../../assets/add.png')} alt="" />
                             <span>Add</span>
                         </p>
@@ -41,6 +41,7 @@ function SubMenu() {
                     </Item>
                     <Item icon="home" className="text-light d-flex">
                         <p className="sub-menu-item">
+                        <img src={require('../../assets/close.png')} alt="" />
                             <span>Close</span>
                         </p>
                     </Item>
