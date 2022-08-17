@@ -8,7 +8,7 @@ import Footer from "./Components/Footer"
 
 function App() {
   return (
-    <div className="container-fluid main">
+    <div className="container-fluid">
         <Nav/>
         <div className="row">
           <div className="col-md-2">

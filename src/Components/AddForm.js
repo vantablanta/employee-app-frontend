@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Form, {SimpleItem,} from 'devextreme-react/form';
+import Form, {SimpleItem, TabbedItem, Tab, TabPanelOptions} from 'devextreme-react/form';
 import DateBox from 'devextreme-react/date-box';
 import 'devextreme-react/text-area';
+
 
 
 export class AddForm extends Component {
@@ -55,8 +56,11 @@ export class AddForm extends Component {
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                             <div className="modal-menu d-flex justify-content-between ps-2 pt-2 pe-2">
-                                <p>Individual WorkPlan</p>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <p className='ms-1'>
+                                    <img src={require('../assets/admin.png')} alt=""  />
+                                    <span className='ps-1 modal-text-span'>Individual WorkPlan</span>
+                                </p>
+                                <button type="button" className="btn-close me-1" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <div className="modal-header">
@@ -65,14 +69,27 @@ export class AddForm extends Component {
                                 </div>
                                 <div className="mb-3">
                                     <div className="p-2 bd-highlight">
-                                        <form onSubmit={this.handleSubmit}>
-                                            <Form colCount={2}>
-                                                <SimpleItem dataField="EmployeeName"  />
-                                                <SimpleItem dataField="Department" />
-                                                <SimpleItem dataField="DateOfJoining"  dataType="date"/>
-                                                <SimpleItem dataField="CostCenter" />
-                                                <SimpleItem dataField="EmployeeCode" />
-                                                <SimpleItem dataField="CompCode" />
+                                        <form onSubmit={this.handleSubmit}>                                        
+                                            <Form colCount={1}>
+                                                    <TabbedItem>
+                                                        <TabPanelOptions />
+                                                        <Tab title="Personal Info">
+                                                            <SimpleItem dataField="EmployeeName" />
+                                                            <SimpleItem dataField="Department" />
+                                                            <SimpleItem dataField="DateOfJoining" dataType="date" />
+                                                            <SimpleItem dataField="CostCenter" />
+                                                            <SimpleItem dataField="EmployeeCode" />
+                                                            <SimpleItem dataField="CompCode" />
+                                                        </Tab>
+                                                        <Tab title="Company Info">
+                                                            <SimpleItem dataField="Comapany Name" />
+                                                            <SimpleItem dataField="Company Code " />
+                                                            <SimpleItem dataField="Date of Registration" dataType="date" />
+                                                            <SimpleItem dataField="Headquarters" />
+                                                            <SimpleItem dataField="KRA Code" />
+                                                            <SimpleItem dataField="Number of Staff" />
+                                                        </Tab>
+                                                    </TabbedItem>
                                             </Form>
                                             <hr />
                                             <div className='mt-3 text-center'>
@@ -94,7 +111,7 @@ export class AddForm extends Component {
                                 </div>
                             </div>
                             <div className='modal-menu'>
-                                <p>New Individual WorkPlan</p>
+                                <p className='ms-1'>New Individual WorkPlan</p>
                             </div>
                         </div>
                     </div>

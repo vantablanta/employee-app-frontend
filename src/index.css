@@ -1,18 +1,19 @@
 body{
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .top-menu{
     background-color: #3c8df9  ;
     color: white;
+    padding: 0;
 }
 
 .top-menu-item{
     color: white! important;
     font-weight: 500;
-    padding-left: 15px;
 }
 
 .page-heading{
@@ -127,15 +128,26 @@ body{
   .main{
     padding: 0;
   }
-
   .footer-text{
+    padding-right: 2px;
+  }
+
+  .footer-text a{
     color: white;
-    font-weight: 400;
+    font-weight: 600;
+    font-size: smaller !important;
+    text-decoration: none;
+    cursor: pointer;
   }
 
   .yellow-footer-line{
     color: #FFCC00;
     padding: 3px;
     opacity: 1;
+    margin: 0;
+  }
+
+  .container-fluid{
+    padding: 0;
     margin: 0;
   }
