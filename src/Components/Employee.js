@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel, Selection, 
-    FilterRow, HeaderFilter, FilterPanel, FilterBuilderPopup, Scrolling, Editing, Export} from 'devextreme-react/data-grid';
+    FilterRow, HeaderFilter, FilterPanel, FilterBuilderPopup, Scrolling, Editing, Summary, TotalItem, Export} from 'devextreme-react/data-grid';
 
-// import { Workbook } from 'exceljs';
-// import { saveAs } from 'file-saver-es';
-// import { exportDataGrid } from 'devextreme/excel_exporter';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver-es';
+import { exportDataGrid } from 'devextreme/excel_exporter';
 
 import SubMenu from './Menus/SubMenu';
 
@@ -21,7 +21,9 @@ export class Employee extends Component {
             key: 'onClick',
             name: 'On Button Click',
           }];
+
         this.filterOperations = ['contains', '='];
+
         this.state = {
             employees: [],
             showFilterRow: true,
@@ -30,6 +32,7 @@ export class Employee extends Component {
             filterValue: 'Pending'
 
         };
+
         this.dataGrid = null;
     }
 
@@ -57,6 +60,7 @@ export class Employee extends Component {
         });
     }
 
+    // DONT DELETE!
     // createClick() {
     //     fetch('https://localhost:7041/api/Employee', {
     //         method: 'POST',
@@ -124,6 +128,28 @@ export class Employee extends Component {
         }
     }
 
+    onExporting(e) {
+        const workbook = new Workbook();
+        const worksheet = workbook.addWorksheet('Main sheet');
+    
+        exportDataGrid({
+          component: e.component,
+          worksheet,
+          autoFilterEnabled: true,
+        }).then(() => {
+          workbook.xlsx.writeBuffer().then((buffer) => {
+            saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+          });
+        });
+        e.cancel = true;
+      }
+
+    startEdit = (e) => {
+        if (e.rowType === "data") {
+            e.component.editRow(e.rowIndex);
+        }
+    }
+
     render() {
         const { employees } = this.state;
         const pageSizes = [10, 25, 50, 100];
@@ -134,15 +160,15 @@ export class Employee extends Component {
 
                 <DataGrid dataSource={employees} allowColumnReordering={true} rowAlternationEnabled={false} showBorders={true}
                     onContentReady={this.onContentReady}  keyExpr="EmployeeCode"  hoverStateEnabled={true} 
-                    showColumnHeaders= {true}>
+                    showColumnHeaders= {true} onExporting={this.onExporting} onRowDblClick={this.startEdit}>
 
                     <FilterPanel visible={true} />
 
                     <GroupPanel visible={true} />
                     <SearchPanel visible={true} highlightCaseSensitive={true} />
-                    <Grouping autoExpandAll={false} />
+                    <Grouping autoExpandAll={true} />
 
-                    <Selection mode="single"  data-bs-toggle="modal" data-bs-target="#exampleModal" />
+                    <Selection mode="multiple"  data-bs-toggle="modal" data-bs-target="#exampleModal" />
 
                     <HeaderFilter visible={true} />
 
@@ -160,16 +186,16 @@ export class Employee extends Component {
                     <Column dataField="CompCode" dataType="string" allowFiltering={true} headerFilter={true}  />
                     <Column dataField="CostCenter" dataType="string"  allowFiltering={true} headerFilter={true} />
 
+                    <Summary>
+                        <TotalItem  column="Salary" summaryType="sum"/>
+                    </Summary>
+
                     <Pager allowedPageSizes={pageSizes} showPageSizeSelector={true} />
                     <Paging defaultPageSize={10} />
 
-                    <Editing
-                    mode="popup"
-                    allowUpdating={true}
-                    allowDeleting={true}
-                    allowAdding={true}
-                />
-
+                    <Editing mode="popup" allowUpdating={false} allowDeleting={false} allowAdding={false} />
+                    <Export enabled={true} allowExportSelectedData={true} />
+                
                 </DataGrid>
 
             </div>

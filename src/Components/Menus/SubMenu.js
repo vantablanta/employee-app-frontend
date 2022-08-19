@@ -18,20 +18,20 @@ function SubMenu() {
                     </Item>
                     <Item className="text-light d-flex">
                         <p className="sub-menu-item" >
-                            <img src={require('../../assets/find.png')} alt="" className="sub-menu-icon" />
+                            <img src={require('../../assets/search.png')} alt="" className="sub-menu-icon" />
                             <span>Find</span>
+                        </p>
+                    </Item>
+                    <Item icon="home" className="text-light d-flex">
+                        <p className="sub-menu-item">
+                            <img src={require('../../assets/excel.png')} alt="" className="sub-menu-icon"/>
+                            <span>Import</span>
                         </p>
                     </Item>
                     <Item icon="home" className="text-light d-flex">
                         <p className="sub-menu-item">
                             <img src={require('../../assets/cancel.png')} alt=""className="sub-menu-icon" />
                            <span>Delete</span>
-                        </p>
-                    </Item>
-                    <Item icon="home" className="text-light d-flex">
-                        <p className="sub-menu-item">
-                            <img src={require('../../assets/export.png')} alt="" className="sub-menu-icon"/>
-                            <span>Export</span>
                         </p>
                     </Item>
                     <Item icon="home" className="text-light d-flex">

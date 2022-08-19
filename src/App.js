@@ -2,6 +2,7 @@ import React from "react";
 import LeftNav from "./Components/Menus/LeftNav";
 import Footer from "./Components/Footer"
 import TopMenu from "./Components/Menus/TopMenu";
+import Popup from "./Components/PopUp"
 
 function App() {
   
@@ -10,6 +11,7 @@ function App() {
       <TopMenu/>
       <LeftNav/>
       <Footer/>
+      <Popup/>
 
     </div>
   );

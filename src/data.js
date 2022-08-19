@@ -12,11 +12,6 @@ export const navigation = [
 ];
 
 
-
-
-
-
-
 export const menus = [
   {
     id: '1',

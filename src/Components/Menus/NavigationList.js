@@ -5,7 +5,7 @@ import { navigation } from '../../data';
 class NavigationList extends React.PureComponent {
   render() {
     return (
-      <div className="list" style={{width: "200px"}}>
+      <div className="list"  style={{width: "200px"}} >
         <img src={require('../../assets/profiles/person.jpg')} alt="" className='img-fluid' />
         <List
           dataSource={navigation}
@@ -19,3 +19,6 @@ class NavigationList extends React.PureComponent {
 }
 
 export default NavigationList;
+
+
+// style={{width: "200px", height: "650px"}}
