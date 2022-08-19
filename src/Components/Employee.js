@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 
 import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel, Selection, 
-    FilterRow, HeaderFilter, FilterPanel, FilterBuilderPopup, Scrolling,} from 'devextreme-react/data-grid';
+    FilterRow, HeaderFilter, FilterPanel, FilterBuilderPopup, Scrolling, Editing, Export} from 'devextreme-react/data-grid';
+
+// import { Workbook } from 'exceljs';
+// import { saveAs } from 'file-saver-es';
+// import { exportDataGrid } from 'devextreme/excel_exporter';
+
 import SubMenu from './Menus/SubMenu';
 
 export class Employee extends Component {
@@ -23,6 +28,7 @@ export class Employee extends Component {
             showHeaderFilter: true,
             currentFilter: this.applyFilterTypes[0].key,
             filterValue: 'Pending'
+
         };
         this.dataGrid = null;
     }
@@ -146,7 +152,7 @@ export class Employee extends Component {
                     <HeaderFilter visible={true} />
                     <Scrolling mode="infinite" />
                     
-                    <Column dataField="Salary" caption="Salary"dataType="number" format="currency" alignment="right" allowSorting={true}  />
+                    <Column dataField="Salary" caption="Salary"dataType="number" format="currency" alignment="left" allowSorting={true}  />
                     <Column dataField="EmployeeCode" dataType="string" headerFilter={true} allowSorting={true}/>
                     <Column dataField="EmployeeName" dataType="string" allowFiltering={true} headerFilter={true} />
                     <Column dataField="Department" dataType="string" allowFiltering={true} headerFilter={true} />
@@ -156,6 +162,13 @@ export class Employee extends Component {
 
                     <Pager allowedPageSizes={pageSizes} showPageSizeSelector={true} />
                     <Paging defaultPageSize={10} />
+
+                    <Editing
+                    mode="popup"
+                    allowUpdating={true}
+                    allowDeleting={true}
+                    allowAdding={true}
+                />
 
                 </DataGrid>
 

@@ -3,18 +3,16 @@ import Drawer from "devextreme-react/drawer";
 import Toolbar from "devextreme-react/toolbar";
 import NavigationList from "./NavigationList.js";
 import Employee from "../Employee.js";
-import TopMenu from "./TopMenu.js";
-
 
 class LeftNav extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       opened: true,
       openedStateMode: "shrink",
       revealMode: "slide",
-      position: "left"
+      position: "left",
     };
 
     this.toolbarItems = [
@@ -48,31 +46,24 @@ class LeftNav extends React.Component {
   }
 
   onOutsideClick() {
-    this.setState({ opened: false });
+    this.setState({ opened: true });
   }
 
   render() {
-    const { opened, openedStateMode, position, revealMode } = this.state;
+    const { opened, openedStateMode, position, revealMode} = this.state;
 
     return (
       <div>
-        <div className="container-fluid">
-            <div className="row">
-            <div className="top-menu">
-                    <TopMenu/>
-                </div>
-                <div className="">
-                    <Toolbar items={this.toolbarItems} />
-                </div>
-            </div>
+        <div className="">
+          <Toolbar items={this.toolbarItems} />
         </div>
-        <Drawer opened={opened}openedStateMode={openedStateMode}position={position}  revealMode={revealMode} component={NavigationList} 
-            closeOnOutsideClick={this.onOutsideClick} >    
-            <div className="ps-3">
-                <Employee/>
+        <Drawer opened={opened} openedStateMode={openedStateMode} position={position} revealMode={revealMode} component={NavigationList}
+          closeOnOutsideClick={this.onOutsideClick}>
+            <div className="ms-2">
+              <Employee/>
             </div>
         </Drawer>
-        
+
       </div>
     );
   }

@@ -1,9 +1,8 @@
-
-import React from "react";
+import React, {Component} from "react";
 import Menu from "devextreme-react/menu";
 import {menus} from "../../data";
 
-class App extends React.Component {
+class TopMenu extends Component {
   constructor(props) {
     super(props);
     this.menus = menus;
@@ -38,29 +37,26 @@ class App extends React.Component {
       hideSubmenuOnMouseLeave
     } = this.state;
     return (
-        <div className="top-menu float-end">
-            <h3 className="float-start customer-name">Customer Name</h3>
-            <div className="d-flex">
-                <form className="col-md-4 d-flex me-3 ">
+        <div className="top-menu">
+            <h3 className="float-start">Customer Name</h3>
+            <div className="d-flex justify-content-end">
+                {/* <form className="d-flex me-5">
                     <input className="form-control mt-1 mb-1" type="search" placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-sm btn-outline-primary ms-1 text-light" type="submit">Icon</button>
-                </form>
+                    <button className="btn btn-sm btn-outline-primary ms-1 text-light" type="submit"><FaSearch/></button>
+                </form> */}
                 <div className="mt-1">
                     <Menu
-                    dataSource={this.menus}
-                    displayExpr="name"
-                    showFirstSubmenuMode={showFirstSubmenuModes}
-                    orientation={orientation}
-                    hideSubmenuOnMouseLeave={hideSubmenuOnMouseLeave}
-                    onItemClick={this.itemClick}
-                    // adaptivityEnabled={true}
+                      dataSource={this.menus}
+                      displayExpr="name"
+                      showFirstSubmenuMode={showFirstSubmenuModes}
+                      orientation={orientation}
+                      hideSubmenuOnMouseLeave={hideSubmenuOnMouseLeave}
+                      onItemClick={this.itemClick}
+                      // adaptivityEnabled={true}
                      />
                 </div>
-
             </div>
-
         </div>
-
     );
   }
 
@@ -91,7 +87,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default TopMenu;
 
 
 

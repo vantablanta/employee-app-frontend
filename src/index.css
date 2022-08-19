@@ -8,7 +8,7 @@ body{
 }
 
 .top-menu{
-    background-color: #3c8df9  ;
+    background-color: #3486f3 !important;
     color: white !important;
 }
 
@@ -121,14 +121,22 @@ body{
     color: white;
   }
 
+  
+  .main{
+    padding: 0;
+  }
+
+  /*FOOTER CSS */
+  .footer{
+    position: fixed;
+    bottom: -2vh;
+    width: 100%;
+  }
      
   .footer-display{
     background-color: #3486f3;
   }
 
-  .main{
-    padding: 0;
-  }
   .footer-text{
     padding-right: 2px;
   }
@@ -181,6 +189,8 @@ body{
   
   .panel-list {
     height: 100%;
+    overflow: scroll;
+    scroll-behavior: smooth;
   }
   
   .dx-drawer-expand.dx-drawer-right .panel-list {
@@ -244,4 +254,10 @@ body{
   .customer-name{
     position: relative;
     left: -45vw
+  }
+
+  .sub-menu-icon{
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
   }

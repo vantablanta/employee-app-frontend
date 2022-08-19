@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Form, {SimpleItem, TabbedItem, Tab, TabPanelOptions} from 'devextreme-react/form';
+import Form, {SimpleItem, TabbedItem, Tab, TabPanelOptions, ButtonItem, ButtonOptions} from 'devextreme-react/form';
 import 'devextreme-react/text-area';
 
 
@@ -12,7 +12,7 @@ export class AddForm extends Component {
         this.state = {
             employee : {
                 EmployeeName: "Michelle Njeri",
-                Department: "Gender",
+                Department: "Software",
                 DateOfJoining: new Date(),
                 EmployeeCode: "22",
                 CompCode: "23",
@@ -22,68 +22,29 @@ export class AddForm extends Component {
         }
     }
 
-    handleSubmit(event){
-        try {
+    handleSubmit(event, employee) {
+        event.preventDefault()
+       
             const requestOptions = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    
-                body: JSON.stringify({ 
-                    employee: this.state.employee
-                })
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin' ,
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(employee)
             };
             fetch('https://localhost:7041/api/Employee', requestOptions)
-                .then( response =>{
-                    response.json()
-                })
-                .then((result) => {
-                    console.log(result)
-                }, (error) => {
-                    console.log(error)
-                })
-            
-    
-            event.preventDefault()
-        } catch (error) {
-            console.log(error)
-        }
-       
+                .then(response =>{
+                   console.log(response)
+                })            
     }
     
-//     handleSubmit(event) {
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        //     body: JSON.stringify({ 
-        //         EmployeeName: this.EmployeeName,
-        //         Department: this.Department,
-        //         DateOfJoining: this.DateOfJoining,
-        //         EmployeeCode: this.EmployeeCode, 
-        //         CompCode: this.CompCode, 
-        //         CostCenter: this.CostCenter 
-        //     })
-        // };
-        // fetch('https://localhost:7041/api/Employee', requestOptions)
-        //     .then( response =>{
-        //         response.json()
-        //     })
-        //     .then((result) => {
-        //         console.log(result)
-        //     }, (error) => {
-        //         console.log(error)
-        //     })
-    
-
-//         event.preventDefault()
-
-// }
-
     render() {
         const { employee } = this.state;
         return (
             <div>
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
-                    <div className="modal-dialog modal-lg">
+                    <div className="modal-dialog modal-fullscreen modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-menu d-flex justify-content-between ps-2 pt-2 pe-2">
                                 <p className='ms-1'>
@@ -100,11 +61,11 @@ export class AddForm extends Component {
                                 <div className="mb-3">
                                     <div className="p-2 bd-highlight">
                                         <form onSubmit={this.handleSubmit}>                                        
-                                            <Form colCount={1}  formData={employee}>
+                                            <Form  formData={employee} id="form">
                                                     <TabbedItem>
                                                         <TabPanelOptions />
                                                         <Tab title="Personal Info">
-                                                            <SimpleItem dataField="EmployeeName" />
+                                                            <SimpleItem dataField="EmployeeName"/>
                                                             <SimpleItem dataField="Department" />
                                                             <SimpleItem dataField="DateOfJoining" dataType="date" />
                                                             <SimpleItem dataField="CostCenter" />
@@ -121,6 +82,14 @@ export class AddForm extends Component {
                                                             <SimpleItem dataField="Number of Staff" />
                                                         </Tab>
                                                     </TabbedItem>
+                                                <ButtonItem>
+                                                    <ButtonOptions
+                                                        text="Submit"
+                                                        stylingMode="contained"
+                                                        type="default"
+                                                        useSubmitBehavior={true}
+                                                    />
+                                                </ButtonItem>
                                             </Form>
                                             <hr />
                                             <div className='mt-3 text-center'>
@@ -128,14 +97,10 @@ export class AddForm extends Component {
                                                     <img src={require('../assets/undo.png')} alt=""  />
                                                     <span className='ps-1'>Cancel</span>
                                                 </button>
-                                                <button className='btn  btn-light text-primary me-1' type='button' >
-                                                    <img src={require('../assets/save.png')} alt="" />
-                                                    <span className='ps-1' type="button">Save</span>
-                                                </button>
-                                                <button className='btn pe-3  btn-light text-primary me-1'>
+                                                {/* <button className='btn pe-3  btn-light text-primary me-1'>
                                                     <img src={require('../assets/save.png')} alt="" />
                                                     <span className='ps-1'>Submit</span>
-                                                </button>
+                                                </button> */}
                                             </div>
                                         </form>
                                     </div>
