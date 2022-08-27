@@ -1,11 +1,9 @@
 import React, {Component} from "react";
 import Menu from "devextreme-react/menu";
-import {menus} from "../../data";
 
 class TopMenu extends Component {
   constructor(props) {
     super(props);
-    this.menus = menus;
     this.showSubmenuModes = [
       {
         name: "onHover",
@@ -20,7 +18,8 @@ class TopMenu extends Component {
       showFirstSubmenuModes: this.showSubmenuModes[1],
       orientation: "horizontal",
       hideSubmenuOnMouseLeave: false,
-      currentProduct: null
+      currentProduct: null,
+      menus : []
     };
     this.itemClick = this.itemClick.bind(this);
     this.showSubmenuModeChanged = this.showSubmenuModeChanged.bind(this);
@@ -30,11 +29,26 @@ class TopMenu extends Component {
     );
   }
 
+  refreshMenus() {
+    fetch('https://localhost:7041/api/Module/super%40live.com')
+        .then(response => response.json())
+        .then(data => {
+            this.setState({ menus: data });
+        }, (err) => {
+            console.log(err)
+        });
+}
+
+componentDidMount() {
+  this.refreshMenus();
+}
+
   render() {
     const {
       showFirstSubmenuModes,
       orientation,
-      hideSubmenuOnMouseLeave
+      hideSubmenuOnMouseLeave, 
+      menus
     } = this.state;
     return (
         <div className="top-menu">
@@ -46,8 +60,8 @@ class TopMenu extends Component {
                 </form> */}
                 <div className="mt-1">
                     <Menu
-                      dataSource={this.menus}
-                      displayExpr="name"
+                      dataSource={menus}
+                      displayExpr="modulecode"
                       showFirstSubmenuMode={showFirstSubmenuModes}
                       orientation={orientation}
                       hideSubmenuOnMouseLeave={hideSubmenuOnMouseLeave}

@@ -2,7 +2,7 @@ body{
     width: 100%;
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0 !important;
     overflow-x: hidden;
 
 }
@@ -55,6 +55,7 @@ body{
 .modal-menu{
     background-color: #bbcee6;
     padding: 0!important;
+    height: 20px;
 }
 
 .add-button{
@@ -260,4 +261,21 @@ body{
     width: 15px;
     height: 15px;
     margin-right: 3px;
+  }
+
+  .add-buttons{
+    color: #0d6efd;
+  }
+
+  .list{
+    width: 20%;
+  }
+
+  .left-nav{
+    background-color: #3486f3;
+  }
+
+  .dx-menu-base .dx-menu-item .dx-menu-item-content .dx-menu-item-text{
+    color: #fff;
+    font-weight: 600;
   }

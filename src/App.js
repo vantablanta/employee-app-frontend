@@ -1,18 +1,22 @@
 import React from "react";
-import LeftNav from "./Components/Menus/LeftNav";
-import Footer from "./Components/Footer"
-import TopMenu from "./Components/Menus/TopMenu";
-import Popup from "./Components/PopUp"
+import MainLanding from "./Components/Landing/MainLanding";
+// import LeftNav from "./Components/Platform/Menus/LeftNav";
+// import Footer from "./Components/Platform/Footer"
+// import TopMenu from "./Components/Platform/Menus/TopMenu";
+// import Popup from "./Components/Platform/PopUp"
 
 function App() {
   
   return (
-    <div className="container-fluid">
-      <TopMenu/>
+    <div className="">
+      
+      {/* <TopMenu/>
       <LeftNav/>
       <Footer/>
-      <Popup/>
+      <Popup/> */}
 
+
+      <MainLanding/>
     </div>
   );
 }

@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 
 import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel, Selection, 
-    FilterRow, HeaderFilter, FilterPanel, FilterBuilderPopup, Scrolling, Editing, Summary, TotalItem, Export} from 'devextreme-react/data-grid';
+    FilterRow, HeaderFilter, FilterPanel, FilterBuilderPopup, Scrolling, Editing, Summary, TotalItem, 
+    Export, ColumnChooser} from 'devextreme-react/data-grid';
 
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
+import { jsPDF } from 'jspdf';
 import { exportDataGrid } from 'devextreme/excel_exporter';
+// import { exportDataGrid } from 'devextreme/pdf_exporter';
 
-import SubMenu from './Menus/SubMenu';
+import SubMenu from '../Platform/Menus/SubMenu';
+
+// const exportFormats = ['pdf', 'xlsx'];
 
 export class Employee extends Component {
 
@@ -130,15 +135,19 @@ export class Employee extends Component {
 
     onExporting(e) {
         const workbook = new Workbook();
+        const doc = new jsPDF();
         const worksheet = workbook.addWorksheet('Main sheet');
     
         exportDataGrid({
-          component: e.component,
-          worksheet,
-          autoFilterEnabled: true,
+            jsPDFDocument: doc,
+            component: e.component,
+            worksheet,
+            indent: 5,
+            autoFilterEnabled: true,
         }).then(() => {
-          workbook.xlsx.writeBuffer().then((buffer) => {
-            saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+            workbook.xlsx.writeBuffer().then((buffer) => {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+            // doc.save('Companies.pdf');
           });
         });
         e.cancel = true;
@@ -160,13 +169,19 @@ export class Employee extends Component {
 
                 <DataGrid dataSource={employees} allowColumnReordering={true} rowAlternationEnabled={false} showBorders={true}
                     onContentReady={this.onContentReady}  keyExpr="EmployeeCode"  hoverStateEnabled={true} 
-                    showColumnHeaders= {true} onExporting={this.onExporting} onRowDblClick={this.startEdit}>
+                    showColumnHeaders= {true} onExporting={this.onExporting} onRowDblClick={this.startEdit} columnHidingEnabled={true}>
 
                     <FilterPanel visible={true} />
 
                     <GroupPanel visible={true} />
                     <SearchPanel visible={true} highlightCaseSensitive={true} />
                     <Grouping autoExpandAll={true} />
+                    <Pager
+                        allowedPageSizes={pageSizes}
+                        showInfo={true}
+                        showNavigationButtons={true}
+                        showPageSizeSelector={true}
+                        visible={true} />
 
                     <Selection mode="multiple"  data-bs-toggle="modal" data-bs-target="#exampleModal" />
 
@@ -177,7 +192,9 @@ export class Employee extends Component {
                     <FilterBuilderPopup position={"right"} />
                     <HeaderFilter visible={true} />
                     <Scrolling mode="infinite" />
-                    
+
+                    <ColumnChooser enabled={true} mode="select" />
+
                     <Column dataField="Salary" caption="Salary"dataType="number" format="currency" alignment="left" allowSorting={true}  />
                     <Column dataField="EmployeeCode" dataType="string" headerFilter={true} allowSorting={true}/>
                     <Column dataField="EmployeeName" dataType="string" allowFiltering={true} headerFilter={true} />
@@ -194,7 +211,7 @@ export class Employee extends Component {
                     <Paging defaultPageSize={10} />
 
                     <Editing mode="popup" allowUpdating={false} allowDeleting={false} allowAdding={false} />
-                    <Export enabled={true} allowExportSelectedData={true} />
+                    <Export enabled={true} allowExportSelectedData={true}  />
                 
                 </DataGrid>
 
